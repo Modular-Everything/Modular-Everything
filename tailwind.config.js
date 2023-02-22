@@ -12,7 +12,15 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-space-mono)", ...fontFamily.sans],
       },
-      colors: {},
+      colors: {
+        "pure-white": "#fff",
+        "pure-black": "#000",
+        black: "#141414",
+        white: "#F9F9F7",
+        "mid-grey": "#B2B2B2",
+        "dark-grey": "#2B2B2B",
+        blue: "#9FF1FF",
+      },
     },
   },
   plugins: [require("prettier-plugin-tailwindcss")],

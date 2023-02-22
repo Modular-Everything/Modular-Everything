@@ -1,17 +1,15 @@
-import {
-  useStoryblokState,
-  getStoryblokApi,
-  StoryblokComponent,
-} from "@storyblok/react";
+import { useStoryblokState, getStoryblokApi } from "@storyblok/react";
 
+import { DragonDrop } from "../components/layout/DragonDrop";
 import { PageHead } from "../components/layout/Head";
 
 export default function Home({ story }) {
   const page = useStoryblokState(story);
+
   return (
     <>
       <PageHead />
-      <StoryblokComponent blok={page.content} />
+      <DragonDrop />
     </>
   );
 }
