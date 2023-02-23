@@ -21,6 +21,12 @@ module.exports = {
         "dark-grey": "#2B2B2B",
         blue: "#9FF1FF",
       },
+      gridTemplateColumns: {
+        "dragon-drop": "repeat(var(--columns), 1fr)",
+      },
+      gridTemplateRows: {
+        "dragon-drop": "repeat(var(--rows), 1fr)",
+      },
     },
   },
   plugins: [require("prettier-plugin-tailwindcss")],

@@ -1,83 +1,98 @@
+import debounce from "lodash/debounce";
+import random from "lodash/random";
 import { useRef, useEffect } from "react";
 
-function getDragAfterElement(zone, y) {
-  const zones = [...zone.querySelectorAll(".draggable:not(.dragging)")];
-  return zones.reduce(
-    (closest, child) => {
-      const box = child.getBoundingClientRect();
-      const offset = y - box.top - box.height / 2;
-
-      if (offset < 0 && offset > closest.offset) {
-        return { offset, element: child };
-      }
-
-      return closest;
-    },
-    { offset: Number.NEGATIVE_INFINITY }
-  ).element;
+/**
+ * getRequiredTiles()
+ * Calculate how many 100x100 tiles can fit into the screen
+ * @returns An object of columns and rows
+ */
+function getRequiredTiles() {
+  const size = 256;
+  return {
+    columns: Math.floor(document.body.clientWidth / size),
+    rows: Math.floor(document.body.clientHeight / size),
+  };
 }
 
+/**
+ * tileStyle()
+ * @returns A random colour and radius Tailwind class
+ */
+function tileStyle() {
+  const colors = [
+    "bg-blue",
+    "bg-white",
+    "bg-pure-black",
+    "bg-dark-grey",
+    "bg-mid-grey",
+  ];
+  const radius = ["rounded-full", "rounded-none", "rounded-[2rem]"];
+  return [colors[random(0, colors.length)], radius[random(0, radius.length)]];
+}
+
+/**
+ * createTile()
+ * Creates a tile Element
+ * @param {number} index The index number from a loop
+ * @returns An HTML Element
+ */
+function createTile(index) {
+  const tile = document.createElement("div");
+  tile.classList.add("tile", "draggable", ...tileStyle());
+  tile.setAttribute("draggable", true);
+  return tile;
+}
+
+/**
+ * createTiles()
+ * Creates tiles from a given quantity
+ * @param {number} quantity How many tiles to create
+ * @param {HTMLElement} wrapper The Element to place the tiles within
+ */
+function createTiles(quantity, wrapper) {
+  Array.from({ length: quantity }).map((tile, index) => {
+    return wrapper.append(createTile(index));
+  });
+}
+
+/**
+ *
+ * @param {HTMLElement} wrapper The Element containing our tiles
+ * @returns
+ */
+function createGrid(wrapper) {
+  wrapper.innerHTML = "";
+
+  const { columns, rows } = getRequiredTiles();
+
+  wrapper.style.setProperty("--columns", columns);
+  wrapper.style.setProperty("--rows", rows);
+
+  return createTiles(columns * rows, wrapper);
+}
+
+/**
+ * DragonDrop()
+ * @returns The React component
+ */
 export function DragonDrop() {
   const wrapper = useRef(null);
 
   useEffect(() => {
-    // Draggable item
-    const draggables = wrapper.current.querySelectorAll(".draggable");
+    const { current } = wrapper;
 
-    draggables.forEach((draggable) => {
-      draggable.addEventListener("dragstart", () => {
-        draggable.classList.add("dragging", "opacity-50");
-      });
-      draggable.addEventListener("dragend", () => {
-        draggable.classList.remove("dragging", "opacity-50");
-      });
-    });
-
-    // Drop zone handler
-    const zone = wrapper.current.querySelector(".drop-zone");
-
-    zone.addEventListener("dragover", (e) => {
-      e.preventDefault();
-
-      const afterElement = getDragAfterElement(zone, e.clientY);
-      const draggable = wrapper.current.querySelector(".dragging");
-
-      if (afterElement === undefined) {
-        zone.append(draggable);
-      } else {
-        afterElement.before(draggable);
-      }
-    });
+    createGrid(current);
+    window.addEventListener(
+      "resize",
+      debounce(() => createGrid(current), 150)
+    );
   }, [wrapper]);
 
   return (
-    <div ref={wrapper}>
-      <div className="drop-zone bg-pure-black p-4">
-        <div
-          className="draggable bg-blue p-4 transition-colors duration-150 ease-in-out"
-          draggable
-        >
-          1
-        </div>
-        <div
-          className="draggable bg-dark-grey p-4 transition-colors duration-150 ease-in-out"
-          draggable
-        >
-          2
-        </div>
-        <div
-          className="draggable bg-mid-grey p-4 transition-colors duration-150 ease-in-out"
-          draggable
-        >
-          3
-        </div>
-        <div
-          className="draggable bg-white p-4 transition-colors duration-150 ease-in-out"
-          draggable
-        >
-          4
-        </div>
-      </div>
-    </div>
+    <div
+      ref={wrapper}
+      className="drop-zone grid h-screen w-screen grid-cols-dragon-drop grid-rows-dragon-drop"
+    />
   );
 }
