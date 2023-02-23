@@ -1,3 +1,5 @@
+import gsap from "gsap";
+import Draggable from "gsap/dist/Draggable";
 import debounce from "lodash/debounce";
 import random from "lodash/random";
 import { useRef, useEffect } from "react";
@@ -28,7 +30,10 @@ function tileStyle() {
     "bg-mid-grey",
   ];
   const radius = ["rounded-full", "rounded-none", "rounded-[2rem]"];
-  return [colors[random(0, colors.length)], radius[random(0, radius.length)]];
+  return [
+    colors[random(0, colors.length - 1)],
+    radius[random(0, radius.length - 1)],
+  ];
 }
 
 /**
@@ -41,6 +46,7 @@ function createTile(index) {
   const tile = document.createElement("div");
   tile.classList.add("tile", "draggable", ...tileStyle());
   tile.setAttribute("draggable", true);
+
   return tile;
 }
 
@@ -73,6 +79,40 @@ function createGrid(wrapper) {
 }
 
 /**
+ * handleResize()
+ * @param {function} func A function to pass to the event listener
+ */
+function handleResize(func) {
+  window.addEventListener("resize", func);
+}
+
+/**
+ * createDraggable();
+ * Creates draggable elements using GreenSock
+ * @param {string} className The class of the draggable element
+ * @param {HTMLElement} wrapper The wrapper of the draggables
+ */
+function createDraggable(className, wrapper) {
+  const { clientWidth, clientHeight } = wrapper.querySelector(className);
+
+  gsap.registerPlugin(Draggable);
+  Draggable.create(className, {
+    bounds: wrapper,
+    type: "x,y",
+    edgeResistance: 0.65,
+    liveSnap: true,
+    snap: {
+      x(endValue) {
+        return Math.round(endValue / clientWidth) * clientWidth;
+      },
+      y(endValue) {
+        return Math.round(endValue / clientHeight) * clientHeight;
+      },
+    },
+  });
+}
+
+/**
  * DragonDrop()
  * @returns The React component
  */
@@ -82,11 +122,13 @@ export function DragonDrop() {
   useEffect(() => {
     const { current } = wrapper;
 
+    // Create the grid layout
     createGrid(current);
-    window.addEventListener(
-      "resize",
-      debounce(() => createGrid(current), 150)
-    );
+    handleResize(debounce(() => createGrid(current), 150));
+
+    // Draggable
+    createDraggable(".draggable", current);
+    handleResize(debounce(() => createDraggable(".draggable", current), 150));
   }, [wrapper]);
 
   return (

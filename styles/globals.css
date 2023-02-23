@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  --vw: 100vw;
+  @apply fixed overflow-hidden leading-none;
+
+  font-size: calc(var(--vw) / 768 * 10);
+
+  @media (min-width: 768px) {
+    font-size: calc(var(--vw) / 1200 * 10);
+  }
+
+  @media (min-width: 1200px) {
+    font-size: calc(var(--vw) / 1512 * 10);
+  }
+}
+
+body {
+  @apply fixed top-0 left-0 h-full w-full bg-pure-white text-black antialiased;
+}
+
+a {
+  color: inherit;
+}
