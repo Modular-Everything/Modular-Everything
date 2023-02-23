@@ -4,16 +4,23 @@ import debounce from "lodash/debounce";
 import random from "lodash/random";
 import { useRef, useEffect } from "react";
 
+import { classNames } from "../../helpers/classNames";
+
 /**
  * getRequiredTiles()
- * Calculate how many 100x100 tiles can fit into the screen
+ * Calculate how many tiles can fit into the screen
+ * @param {HTMLElement} wrapper The Element that wraps the tiles
  * @returns An object of columns and rows
  */
-function getRequiredTiles() {
+function getRequiredTiles(wrapper) {
   const size = 256;
+  const { clientWidth, clientHeight } = wrapper;
+
+  console.log(clientWidth);
+
   return {
-    columns: Math.floor(document.body.clientWidth / size),
-    rows: Math.floor(document.body.clientHeight / size),
+    columns: Math.floor(clientWidth / size),
+    rows: Math.floor(clientHeight / size),
   };
 }
 
@@ -44,9 +51,8 @@ function tileStyle() {
  */
 function createTile(index) {
   const tile = document.createElement("div");
-  tile.classList.add("tile", "draggable", ...tileStyle());
+  tile.classList.add("tile", "draggable", "transition", ...tileStyle());
   tile.setAttribute("draggable", true);
-
   return tile;
 }
 
@@ -70,7 +76,7 @@ function createTiles(quantity, wrapper) {
 function createGrid(wrapper) {
   wrapper.innerHTML = "";
 
-  const { columns, rows } = getRequiredTiles();
+  const { columns, rows } = getRequiredTiles(wrapper);
 
   wrapper.style.setProperty("--columns", columns);
   wrapper.style.setProperty("--rows", rows);
@@ -114,9 +120,10 @@ function createDraggable(className, wrapper) {
 
 /**
  * DragonDrop()
+ * @param {string} className A string of classNames
  * @returns The React component
  */
-export function DragonDrop() {
+export function DragonDrop({ className }) {
   const wrapper = useRef(null);
 
   useEffect(() => {
@@ -134,7 +141,10 @@ export function DragonDrop() {
   return (
     <div
       ref={wrapper}
-      className="drop-zone grid h-screen w-screen grid-cols-dragon-drop grid-rows-dragon-drop"
+      className={classNames(
+        className,
+        "drop-zone grid h-screen w-full grid-cols-dragon-drop grid-rows-dragon-drop"
+      )}
     />
   );
 }

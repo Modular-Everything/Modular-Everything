@@ -9,7 +9,10 @@ export default function Home({ story }) {
   return (
     <>
       <PageHead />
-      <DragonDrop />
+      <div className="grid w-screen grid-cols-3">
+        <nav className="col-span-1">nav</nav>
+        <DragonDrop className="col-span-2" />
+      </div>
     </>
   );
 }
