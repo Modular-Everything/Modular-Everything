@@ -9,9 +9,9 @@ export default function Home({ story }) {
   return (
     <>
       <PageHead />
-      <div className="grid w-screen grid-cols-3">
-        <nav className="col-span-1">nav</nav>
-        <DragonDrop className="col-span-2" />
+      <div className="grid w-screen grid-cols-7">
+        <nav className="col-span-2 bg-light-grey text-mid-grey">nav</nav>
+        <DragonDrop className="col-span-5" />
       </div>
     </>
   );
