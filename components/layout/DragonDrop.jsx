@@ -16,8 +16,6 @@ function getRequiredTiles(wrapper) {
   const size = 256;
   const { clientWidth, clientHeight } = wrapper;
 
-  console.log(clientWidth);
-
   return {
     columns: Math.floor(clientWidth / size),
     rows: Math.floor(clientHeight / size),
