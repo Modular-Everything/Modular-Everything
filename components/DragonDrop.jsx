@@ -13,7 +13,7 @@ import { classNames } from "../helpers/classNames";
  * @returns An object of columns and rows
  */
 function getRequiredTiles(wrapper) {
-  const size = 256;
+  const size = 150;
   const { clientWidth, clientHeight } = wrapper;
 
   return {
@@ -29,7 +29,7 @@ function getRequiredTiles(wrapper) {
 function tileStyle() {
   const colorBlue = "bg-blue";
   const colorBlack = "bg-blue";
-  const roundedNone = "rounded-none";
+  // const roundedNone = "rounded-none";
 
   const colors = [
     colorBlue,
@@ -38,17 +38,17 @@ function tileStyle() {
     "bg-dark-grey",
     "bg-mid-grey",
   ];
-  const radius = [
-    roundedNone,
-    roundedNone,
-    roundedNone,
-    roundedNone,
-    "rounded-full",
-    "rounded-[2rem]",
-  ];
+  // const radius = [
+  //   roundedNone,
+  //   roundedNone,
+  //   roundedNone,
+  //   roundedNone,
+  //   "rounded-full",
+  //   "rounded-[2rem]",
+  // ];
   return [
     colors[random(0, colors.length - 1)],
-    radius[random(0, radius.length - 1)],
+    // radius[random(0, radius.length - 1)],
   ];
 }
 
