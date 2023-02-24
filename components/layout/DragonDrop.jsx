@@ -27,14 +27,25 @@ function getRequiredTiles(wrapper) {
  * @returns A random colour and radius Tailwind class
  */
 function tileStyle() {
+  const colorBlue = "bg-blue";
+  const colorBlack = "bg-blue";
+  const roundedNone = "rounded-none";
+
   const colors = [
-    "bg-blue",
+    colorBlue,
+    colorBlack,
     "bg-white",
-    "bg-pure-black",
     "bg-dark-grey",
     "bg-mid-grey",
   ];
-  const radius = ["rounded-full", "rounded-none", "rounded-[2rem]"];
+  const radius = [
+    roundedNone,
+    roundedNone,
+    roundedNone,
+    roundedNone,
+    "rounded-full",
+    "rounded-[2rem]",
+  ];
   return [
     colors[random(0, colors.length - 1)],
     radius[random(0, radius.length - 1)],
