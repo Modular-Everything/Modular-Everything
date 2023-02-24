@@ -4,7 +4,7 @@ import debounce from "lodash/debounce";
 import random from "lodash/random";
 import { useRef, useEffect } from "react";
 
-import { classNames } from "../../helpers/classNames";
+import { classNames } from "../helpers/classNames";
 
 /**
  * getRequiredTiles()

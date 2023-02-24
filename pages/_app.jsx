@@ -3,7 +3,7 @@ import { Space_Mono } from "@next/font/google";
 import { storyblokInit, apiPlugin } from "@storyblok/react";
 import { useRouter } from "next/router";
 
-import { Page } from "../components/layout/Page";
+import { Page } from "../components//Page";
 
 const components = {
   page: Page,

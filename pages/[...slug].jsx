@@ -4,7 +4,7 @@ import {
   StoryblokComponent,
 } from "@storyblok/react";
 
-import { PageHead } from "../components/layout/Head";
+import { PageHead } from "../components//Head";
 
 export default function Page({ story }) {
   const page = useStoryblokState(story);

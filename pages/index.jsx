@@ -1,7 +1,8 @@
 import { useStoryblokState, getStoryblokApi } from "@storyblok/react";
 
-import { DragonDrop } from "../components/layout/DragonDrop";
-import { PageHead } from "../components/layout/Head";
+import { PageHead } from "../components//Head";
+import { Navigation } from "../components//Navigation";
+import { DragonDrop } from "../components/DragonDrop";
 
 export default function Home({ story }) {
   const page = useStoryblokState(story);
@@ -10,7 +11,7 @@ export default function Home({ story }) {
     <>
       <PageHead />
       <div className="grid w-screen grid-cols-7">
-        <nav className="col-span-2 bg-light-grey text-mid-grey">nav</nav>
+        <Navigation />
         <DragonDrop className="col-span-5" />
       </div>
     </>
