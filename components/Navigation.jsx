@@ -94,10 +94,13 @@ export function Navigation() {
     <nav className="col-span-3 bg-light-grey text-mid-grey" ref={nav}>
       <ul className="relative flex flex-col tracking-tighter" ref={wrapper}>
         {navigation.map((item, index) => (
-          <li key={index} className="absolute block text-4xl leading-none">
+          <li
+            key={index}
+            className="absolute block w-full text-4xl leading-none"
+          >
             <Link
               href={item.link}
-              className="transition-colors hover:text-black"
+              className="block transition-colors hover:text-black"
             >
               {item.title}
             </Link>
