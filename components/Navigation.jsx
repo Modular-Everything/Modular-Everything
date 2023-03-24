@@ -1,7 +1,9 @@
 import gsap from "gsap";
-import Draggable from "gsap/dist/Draggable";
+import Observer from "gsap/dist/Observer";
 import Link from "next/link";
 import { useRef, useLayoutEffect } from "react";
+
+import { verticalLoop } from "../helpers/verticalLoop";
 
 const navItems = [
   { title: "Nalgene", link: "/", id: 1 },
@@ -26,67 +28,34 @@ export function Navigation() {
   const wrapper = useRef();
 
   useLayoutEffect(() => {
-    gsap.registerPlugin(Draggable);
-
-    const items = wrapper.current.querySelectorAll("li");
-    const itemHeight = items[0].clientHeight;
-    const itemsHeight = itemHeight * items.length;
-    const itemsProgress = gsap.utils.wrap(0, 1);
+    gsap.registerPlugin(Observer);
 
     const ctx = gsap.context(() => {
-      // Set the height of each item so they stack
-      items.forEach((item, index) => {
-        gsap.set(item, {
-          y: index * itemHeight,
-          top: -itemHeight,
-        });
+      const loop = verticalLoop("ul li", {
+        repeat: -1,
+        center: false,
       });
 
-      // Create animation... try unpausing it to see what's going on
-      const animation = gsap
-        .to("li", {
-          duration: 1,
-          y: `+=${itemsHeight}`, // the total height of the items
-          paused: true,
-          ease: "linear", // disable easing, it f's with this
-          repeat: -1, // repeat infinitely
-          modifiers: {
-            y: (y) => {
-              let pos = y;
-              // Set the Y value to the value of the remainder after dividing the current Y position by the total number of items. This is what sets the item position and calculates whether its position should be shifted back to the top of the page. If the itemsHeight is 600 and the Y is 600, then the remainder is 0 so it gets moved back to the top. If the itemsHeight is 600 and the Y is 700, the remainder is 100 so the item is set to 100px
-              pos = Number.parseFloat(y) % itemsHeight;
-              return `${pos}px`;
-            },
-          },
-        })
-        .progress(1 / items.length);
+      loop.timeScale(0);
 
-      // Create a proxy to capture the dragging without
-      // actually affecting the element. In other words,
-      // we want to understand the users drag behaviour
-      // without actually dragging the thing, because
-      // we just use this drag data elsewhere
-      const proxy = document.createElement("div");
-      const props = gsap.getProperty(proxy);
-
-      // Update progress
-      function updateProgress() {
-        animation.progress(itemsProgress(props("y") / itemsHeight));
-      }
-
-      // Set the proxy element to be draggable and send
-      // the drag and throw data to updateProgress
-      Draggable.create(proxy, {
-        trigger: nav.current,
-        throwProps: true,
-        onDrag: updateProgress,
-        onThrowUpdate: updateProgress,
-        snap: {
-          y: gsap.utils.snap(itemHeight),
+      Observer.create({
+        target: window,
+        type: "wheel,touch",
+        wheelSpeed: 0.25,
+        onChange: (self) => {
+          gsap.to(loop, {
+            timeScale: self.deltaY,
+            ease: "none",
+          });
+        },
+        onStop: () => {
+          gsap.to(loop, {
+            timeScale: 0,
+            ease: "none",
+          });
         },
       });
     }, nav);
-
     return () => ctx.revert();
   });
 
@@ -96,7 +65,9 @@ export function Navigation() {
         {navigation.map((item, index) => (
           <li
             key={index}
-            className="absolute block w-full text-4xl leading-none"
+            className={`block w-full text-4xl leading-none tracking-tighter ${
+              index === 5 && "text-black"
+            }`}
           >
             <Link
               href={item.link}
