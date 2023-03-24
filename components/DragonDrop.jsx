@@ -5,6 +5,7 @@ import random from "lodash/random";
 import { useRef, useEffect } from "react";
 
 import { classNames } from "../helpers/classNames";
+// import Click from "../public/audio/click.ogg";
 
 /**
  * getRequiredTiles()
@@ -109,13 +110,20 @@ function handleResize(func) {
  */
 function createDraggable(className, wrapper) {
   const { clientWidth, clientHeight } = wrapper.querySelector(className);
-
   gsap.registerPlugin(Draggable);
+
+  const pickup = new Audio("/audio/pickup.mp3");
+  const drop = new Audio("/audio/drop.mp3");
+  const move = new Audio("/audio/move.mp3");
+
   Draggable.create(className, {
     bounds: wrapper,
     type: "x,y",
     edgeResistance: 0.65,
     liveSnap: true,
+    onPress: () => pickup.play(),
+    onRelease: () => drop.play(),
+    onDrag: () => move.play(),
     snap: {
       x(endValue) {
         return Math.round(endValue / clientWidth) * clientWidth;
