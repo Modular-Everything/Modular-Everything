@@ -1,31 +1,27 @@
 import gsap from "gsap";
 import Observer from "gsap/dist/Observer";
-import Link from "next/link";
 import { useRef, useLayoutEffect } from "react";
 
 import { verticalLoop } from "../helpers/verticalLoop";
+import { ActiveLink } from "./ActiveLink";
 
-const navItems = [
-  { title: "Nalgene", link: "/", id: 1 },
-  { title: "Montbell", link: "/", id: 2 },
-  { title: "Arc'teryx", link: "/", id: 3 },
-  { title: "Snow Peak", link: "/", id: 4 },
-  { title: "Aquapac", link: "/", id: 5 },
-  { title: "Colorful Standard", link: "/", id: 6 },
-];
+function handleClick(e) {
+  const click = new Audio("/audio/click.mp3");
+  click.play();
+}
 
-const navigation = [
-  ...navItems,
-  ...navItems,
-  ...navItems,
-  ...navItems,
-  ...navItems,
-  ...navItems,
-];
-
-export function Navigation() {
+export function Navigation({ links }) {
   const nav = useRef();
   const wrapper = useRef();
+
+  const navigation = [
+    ...links,
+    ...links,
+    ...links,
+    ...links,
+    ...links,
+    ...links,
+  ];
 
   useLayoutEffect(() => {
     gsap.registerPlugin(Observer);
@@ -41,17 +37,18 @@ export function Navigation() {
       Observer.create({
         target: window,
         type: "wheel,touch",
-        wheelSpeed: 0.25,
+        lockAxis: true,
+        scrollSpeed: -1,
         onChange: (self) => {
           gsap.to(loop, {
-            timeScale: self.deltaY,
-            ease: "none",
-          });
-        },
-        onStop: () => {
-          gsap.to(loop, {
-            timeScale: 0,
-            ease: "none",
+            timeScale: self.deltaY * 0.35,
+            onComplete: () => {
+              gsap.to(loop, {
+                timeScale: 0,
+                duration: 1,
+                ease: "none",
+              });
+            },
           });
         },
       });
@@ -62,19 +59,20 @@ export function Navigation() {
   return (
     <nav className="col-span-3 bg-light-grey text-mid-grey" ref={nav}>
       <ul className="relative flex flex-col tracking-tighter" ref={wrapper}>
-        {navigation.map((item, index) => (
+        {navigation.map((item) => (
           <li
-            key={index}
-            className={`block w-full text-4xl leading-none tracking-tighter ${
-              index === 5 && "text-black"
-            }`}
+            key={item._uid}
+            className="block w-full text-4xl leading-none tracking-tighter"
           >
-            <Link
-              href={item.link}
-              className="block transition-colors hover:text-black"
+            <ActiveLink
+              href={`/${item.slug}`}
+              scroll={false}
+              onClick={(e) => handleClick(e)}
+              className="block cursor-pointer transition-colors hover:text-black"
+              activeClassName="text-black"
             >
-              {item.title}
-            </Link>
+              {item.name}
+            </ActiveLink>
           </li>
         ))}
       </ul>

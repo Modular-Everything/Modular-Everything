@@ -32,9 +32,7 @@ function LaunchApp({ Component, pageProps }) {
   }
 
   return (
-    <main
-      className={`key-${pageProps.story.id} ${spaceMono.variable} font-sans`}
-    >
+    <main className={`${spaceMono.variable} font-sans`}>
       <Component {...pageProps} />
     </main>
   );
