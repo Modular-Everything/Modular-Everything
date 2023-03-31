@@ -17,8 +17,6 @@ export function ActiveLink({
       const linkPathname = new URL(props.as || props.href, location.href)
         .pathname;
 
-      console.log(linkPathname);
-
       const activePathname = new URL(asPath, location.href).pathname;
 
       const newClassName =
