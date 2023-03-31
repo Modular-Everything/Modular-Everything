@@ -10,12 +10,18 @@ export default function Home({ story, all_pages: { links } }) {
     slug.startsWith("work/")
   );
 
+  console.log(page);
+
   return (
     <>
       <PageHead />
       <div className="grid w-screen grid-cols-9">
         <Navigation links={nav} />
-        <DragonDrop className="col-span-6" />
+        {page.full_slug.startsWith("work/") ? (
+          <div className="col-span-6">{page.name}</div>
+        ) : (
+          <DragonDrop className="col-span-6" />
+        )}
       </div>
     </>
   );
