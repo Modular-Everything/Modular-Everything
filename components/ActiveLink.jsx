@@ -28,8 +28,6 @@ export function ActiveLink({
         setComputedClassName(newClassName);
       }
     }
-
-    console.log(computedClassName);
   }, [
     asPath,
     isReady,
