@@ -8,16 +8,15 @@ export function Page({ blok, className }) {
 
   return (
     <div className={classNames(className, "grid h-screen grid-rows-12")}>
-      {content.type_of_work ||
-        (content.stack && (
-          <div className="row-start-1 row-end-1 flex flex-col justify-end bg-dark-grey text-lg text-white">
-            <p className="leading-none">
-              {content.type_of_work && <span>{content.type_of_work}</span>}
-              {content.type_of_work && content.stack && <span> &#8600; </span>}
-              {content.stack && <span>{content.stack}</span>}
-            </p>
-          </div>
-        ))}
+      {(content.type_of_work || content.stack) && (
+        <div className="row-start-1 row-end-1 flex flex-col justify-end bg-dark-grey text-lg text-white">
+          <p className="leading-none">
+            {content.type_of_work && <span>{content.type_of_work}</span>}
+            {content.type_of_work && content.stack && <span> &#8600; </span>}
+            {content.stack && <span>{content.stack}</span>}
+          </p>
+        </div>
+      )}
 
       <div className="row-start-2 row-end-5 grid grid-cols-6">
         {content.description && (
