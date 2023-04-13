@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { DragonDrop } from "../components/DragonDrop";
 import { PageHead } from "../components/Head";
 import { Navigation } from "../components/Navigation";
+import { Page } from "../components/Page";
 import { Sidebar } from "../components/Sidebar";
 
 export default function Home({ story, all_pages: { links } }) {
@@ -44,15 +45,15 @@ export default function Home({ story, all_pages: { links } }) {
       );
     }
 
-    router.events.on("routeChangeStart", aniStart);
-    router.events.on("routeChangeComplete", aniEnd);
-    router.events.on("routeChangeError", aniEnd);
+    // router.events.on("routeChangeStart", aniStart);
+    // router.events.on("routeChangeComplete", aniEnd);
+    // router.events.on("routeChangeError", aniEnd);
 
-    return () => {
-      router.events.off("routeChangeStart", aniStart);
-      router.events.off("routeChangeComplete", aniEnd);
-      router.events.off("routeChangeError", aniEnd);
-    };
+    // return () => {
+    //   router.events.off("routeChangeStart", aniStart);
+    //   router.events.off("routeChangeComplete", aniEnd);
+    //   router.events.off("routeChangeError", aniEnd);
+    // };
   }, [router]);
 
   return (
@@ -67,7 +68,9 @@ export default function Home({ story, all_pages: { links } }) {
         <Navigation links={nav} className="col-span-4" />
 
         {page.full_slug.startsWith("work/") ? (
-          <div className="col-span-7">{page.name}</div>
+          <Page className="col-span-7" blok={page}>
+            {page.name}
+          </Page>
         ) : (
           <DragonDrop className="col-span-7" />
         )}

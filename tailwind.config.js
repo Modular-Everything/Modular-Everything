@@ -27,6 +27,21 @@ module.exports = {
       },
       gridTemplateRows: {
         "dragon-drop": "repeat(var(--rows), 1fr)",
+        12: "repeat(12, 1fr)",
+      },
+      gridRowStart: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
+      },
+      gridRowEnd: {
+        8: "8",
+        9: "9",
+        10: "10",
+        11: "11",
+        12: "12",
       },
     },
   },

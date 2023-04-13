@@ -44,7 +44,7 @@ export function Sidebar({ className }) {
         </Link>
       </div>
 
-      <div className="sidebar__footer bg-blue text-2xl leading-none tracking-tight">
+      <div className="sidebar__footer bg-blue text-lg leading-none tracking-tight">
         Selected development works 18&ndash;23&#8599;
       </div>
     </div>

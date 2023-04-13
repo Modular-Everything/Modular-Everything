@@ -18,7 +18,7 @@ html {
 }
 
 body {
-  @apply fixed top-0 left-0 h-full w-full bg-pure-white text-black antialiased;
+  @apply fixed top-0 left-0 h-full w-full bg-pure-white leading-none tracking-tight text-black antialiased;
 }
 
 a {
