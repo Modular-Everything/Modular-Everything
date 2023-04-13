@@ -45,7 +45,7 @@ export function Navigation({ links }) {
             onComplete: () => {
               gsap.to(loop, {
                 timeScale: 0,
-                duration: 1,
+                duration: 0.5,
                 ease: "none",
               });
             },
@@ -62,14 +62,13 @@ export function Navigation({ links }) {
         {navigation.map((item) => (
           <li
             key={item._uid}
-            className="block w-full text-4xl leading-none tracking-tighter"
+            className="block w-full text-6xl leading-none tracking-tighter"
           >
             <ActiveLink
-              href={`/${item.slug}`}
-              scroll={false}
               onClick={(e) => handleClick(e)}
               className="block cursor-pointer transition-colors hover:text-black"
               activeClassName="text-black"
+              href={`/${item.slug}`}
             >
               {item.name}
             </ActiveLink>
