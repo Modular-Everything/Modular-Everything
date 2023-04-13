@@ -1,7 +1,7 @@
 import { useStoryblokState, getStoryblokApi } from "@storyblok/react";
 import { gsap } from "gsap";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { DragonDrop } from "../components/DragonDrop";
 import { PageHead } from "../components/Head";
