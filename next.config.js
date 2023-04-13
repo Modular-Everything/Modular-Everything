@@ -1,4 +1,5 @@
 const nextConfig = {
+  domains: ["a.storyblok.com"],
   images: {
     loader: "custom",
     loaderFile: "./helpers/imageLoader.js",
