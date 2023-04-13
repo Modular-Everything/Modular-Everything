@@ -3,6 +3,7 @@ import { useStoryblokState, getStoryblokApi } from "@storyblok/react";
 import { DragonDrop } from "../components/DragonDrop";
 import { PageHead } from "../components/Head";
 import { Navigation } from "../components/Navigation";
+import { Sidebar } from "../components/Sidebar";
 
 export default function Home({ story, all_pages: { links } }) {
   const page = useStoryblokState(story);
@@ -15,12 +16,16 @@ export default function Home({ story, all_pages: { links } }) {
   return (
     <>
       <PageHead />
-      <div className="grid w-screen grid-cols-9">
-        <Navigation links={nav} />
+
+      <div className="grid h-screen w-screen grid-cols-12">
+        <Sidebar className="col-span-1" />
+
+        <Navigation links={nav} className="col-span-4" />
+
         {page.full_slug.startsWith("work/") ? (
-          <div className="col-span-6">{page.name}</div>
+          <div className="col-span-7">{page.name}</div>
         ) : (
-          <DragonDrop className="col-span-6" />
+          <DragonDrop className="col-span-7" />
         )}
       </div>
     </>
