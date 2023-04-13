@@ -1,4 +1,7 @@
 import { useStoryblokState, getStoryblokApi } from "@storyblok/react";
+import { gsap } from "gsap";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 import { DragonDrop } from "../components/DragonDrop";
 import { PageHead } from "../components/Head";
@@ -11,11 +14,52 @@ export default function Home({ story, all_pages: { links } }) {
     slug.startsWith("work/")
   );
 
-  console.log(page);
+  const router = useRouter();
+
+  useEffect(() => {
+    const target = ".transition-screen";
+
+    function aniStart() {
+      gsap.to(target, {
+        xPercent: 100,
+        duration: 0.4,
+        ease: "Expo.easeInOut",
+      });
+    }
+
+    function aniEnd() {
+      gsap.fromTo(
+        target,
+        {
+          xPercent: 100,
+        },
+        {
+          xPercent: 200,
+          duration: 0.4,
+          ease: "Expo.easeInOut",
+          onComplete: () => {
+            gsap.set(target, { xPercent: 0 });
+          },
+        }
+      );
+    }
+
+    router.events.on("routeChangeStart", aniStart);
+    router.events.on("routeChangeComplete", aniEnd);
+    router.events.on("routeChangeError", aniEnd);
+
+    return () => {
+      router.events.off("routeChangeStart", aniStart);
+      router.events.off("routeChangeComplete", aniEnd);
+      router.events.off("routeChangeError", aniEnd);
+    };
+  }, [router]);
 
   return (
     <>
       <PageHead />
+
+      <div className="transition-screen fixed top-0 left-0 z-50 h-screen w-full -translate-x-full bg-blue" />
 
       <div className="grid h-screen w-screen grid-cols-12">
         <Sidebar className="col-span-1" />
