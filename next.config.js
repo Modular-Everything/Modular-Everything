@@ -1,7 +1,4 @@
 const nextConfig = {
-  experimental: {
-    scrollRestoration: true,
-  },
   images: {
     loader: "custom",
     loaderFile: "./helpers/imageLoader.js",
