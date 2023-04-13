@@ -2,6 +2,7 @@ import gsap from "gsap";
 import Observer from "gsap/dist/Observer";
 import { useRef, useLayoutEffect } from "react";
 
+import { classNames } from "../helpers/classNames";
 import { verticalLoop } from "../helpers/verticalLoop";
 import { ActiveLink } from "./ActiveLink";
 
@@ -10,7 +11,7 @@ function handleClick(e) {
   click.play();
 }
 
-export function Navigation({ links }) {
+export function Navigation({ links, className }) {
   const nav = useRef();
   const wrapper = useRef();
 
@@ -57,7 +58,10 @@ export function Navigation({ links }) {
   });
 
   return (
-    <nav className="col-span-3 bg-light-grey text-mid-grey" ref={nav}>
+    <nav
+      className={classNames(className, "h-screen bg-light-grey text-mid-grey")}
+      ref={nav}
+    >
       <ul className="relative flex flex-col tracking-tighter" ref={wrapper}>
         {navigation.map((item) => (
           <li
