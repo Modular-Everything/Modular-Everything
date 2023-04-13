@@ -71,7 +71,7 @@ export function Navigation({ links, className }) {
             <ActiveLink
               onClick={(e) => handleClick(e)}
               className="block cursor-pointer transition-colors hover:text-black"
-              activeClassName="text-black border-b-8 border-blue inline-block pointer-events-none"
+              activeClassName="text-black pointer-events-none"
               href={`/${item.slug}`}
             >
               {item.name}
