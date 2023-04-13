@@ -45,15 +45,15 @@ export default function Home({ story, all_pages: { links } }) {
       );
     }
 
-    // router.events.on("routeChangeStart", aniStart);
-    // router.events.on("routeChangeComplete", aniEnd);
-    // router.events.on("routeChangeError", aniEnd);
+    router.events.on("routeChangeStart", aniStart);
+    router.events.on("routeChangeComplete", aniEnd);
+    router.events.on("routeChangeError", aniEnd);
 
-    // return () => {
-    //   router.events.off("routeChangeStart", aniStart);
-    //   router.events.off("routeChangeComplete", aniEnd);
-    //   router.events.off("routeChangeError", aniEnd);
-    // };
+    return () => {
+      router.events.off("routeChangeStart", aniStart);
+      router.events.off("routeChangeComplete", aniEnd);
+      router.events.off("routeChangeError", aniEnd);
+    };
   }, [router]);
 
   return (
