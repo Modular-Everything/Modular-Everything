@@ -1,3 +1,4 @@
+/* eslint-disable no-invalid-this */
 import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import debounce from "lodash/debounce";
@@ -116,14 +117,38 @@ function createDraggable(className, wrapper) {
   const drop = new Audio("/audio/drop.mp3");
   const move = new Audio("/audio/move.mp3");
 
+  const tile = document.querySelector(".tile");
+  const grid = document.querySelector(".tiles");
+  const rows = Number(getComputedStyle(grid).getPropertyValue("--rows"));
+  const cols = Number(getComputedStyle(grid).getPropertyValue("--columns"));
+
+  function dragAction() {
+    move.play();
+
+    // Calculate the current index based on element's position
+    const index = {
+      row: gsap.utils.clamp(
+        Math.round(this.y / tile.clientHeight),
+        rows,
+        Math.round(this.y / tile.clientHeight)
+      ),
+      col: gsap.utils.clamp(
+        Math.round(this.x / tile.clientWidth),
+        cols,
+        Math.round(this.x / tile.clientWidth)
+      ),
+    };
+  }
+
   Draggable.create(className, {
     bounds: wrapper,
     type: "x,y",
     edgeResistance: 0.65,
     liveSnap: true,
-    onPress: () => pickup.play(),
+    // onPress: () => pickup.play(),
     onRelease: () => drop.play(),
-    onDrag: () => move.play(),
+    // onDrag: () =>
+    onDrag: dragAction,
     snap: {
       x(endValue) {
         return Math.round(endValue / clientWidth) * clientWidth;
@@ -160,7 +185,7 @@ export function DragonDrop({ className }) {
       ref={wrapper}
       className={classNames(
         className,
-        "drop-zone grid h-screen w-full grid-cols-dragon-drop grid-rows-dragon-drop"
+        "tiles drop-zone grid h-screen w-full grid-cols-dragon-drop grid-rows-dragon-drop"
       )}
     />
   );
