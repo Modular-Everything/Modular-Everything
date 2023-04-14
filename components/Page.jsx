@@ -23,9 +23,7 @@ export function Page({ blok, className }) {
           <div className="col-span-2 flex flex-col justify-end bg-black">
             <h1 className="invisible h-0 w-0">{name}</h1>
             <p className="text-lg leading-none text-white">
-              The latest iteration of the Outbreak Fest website, featuring a
-              countdown timer to the event, line-up posters, event history and
-              interactive stage times.
+              {content.description}
             </p>
           </div>
         )}
