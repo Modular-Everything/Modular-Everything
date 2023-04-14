@@ -3,6 +3,26 @@ import Link from "next/link";
 
 import { classNames } from "../helpers/classNames";
 
+function Media({ src }) {
+  const { filename, alt } = src;
+
+  if (filename.includes(".webm")) {
+    return (
+      <video
+        muted
+        autoPlay
+        loop
+        width="100%"
+        className="h-full w-full object-cover"
+      >
+        <source src={filename} type="video/webm" />
+      </video>
+    );
+  }
+
+  return <Image src={filename} alt={alt} fill className="object-cover" />;
+}
+
 export function Page({ blok, className }) {
   const { name, content } = blok;
 
@@ -43,14 +63,7 @@ export function Page({ blok, className }) {
       </div>
 
       <div className="relative row-start-5 row-end-12">
-        {content.media?.filename && (
-          <Image
-            src={content.media.filename}
-            alt={content.media.alt}
-            fill
-            className="object-cover"
-          />
-        )}
+        {content.media?.filename && <Media src={content.media} />}
       </div>
 
       <div className="row-end-13 row-start-13 flex justify-end">
