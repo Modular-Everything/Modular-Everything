@@ -23,7 +23,7 @@ export default function Home({ story, all_pages: { links } }) {
     function aniStart() {
       gsap.to(target, {
         xPercent: 100,
-        duration: 0.4,
+        duration: 0.3,
         ease: "Expo.easeInOut",
       });
     }
@@ -36,7 +36,7 @@ export default function Home({ story, all_pages: { links } }) {
         },
         {
           xPercent: 200,
-          duration: 0.4,
+          duration: 0.3,
           ease: "Expo.easeInOut",
           onComplete: () => {
             gsap.set(target, { xPercent: 0 });
