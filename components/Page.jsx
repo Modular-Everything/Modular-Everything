@@ -1,3 +1,4 @@
+import { storyblokEditable } from "@storyblok/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,7 +28,10 @@ export function Page({ blok, className }) {
   const { name, content } = blok;
 
   return (
-    <div className={classNames(className, "grid h-screen grid-rows-12")}>
+    <div
+      className={classNames(className, "grid h-screen grid-rows-12")}
+      {...storyblokEditable(blok)}
+    >
       {(content.type_of_work || content.stack) && (
         <div className="row-start-1 row-end-1 flex flex-col justify-end bg-dark-grey text-lg text-white">
           <p className="leading-none">
