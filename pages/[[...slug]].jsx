@@ -60,7 +60,7 @@ export default function Home({ story, all_pages: { links } }) {
     <>
       <PageHead />
 
-      <div className="transition-screen fixed top-0 left-0 z-50 h-screen w-full -translate-x-full bg-blue" />
+      <div className="transition-screen fixed top-0 left-0 z-[5000] h-screen w-full -translate-x-full bg-blue" />
 
       <div className="grid h-screen w-screen grid-cols-12">
         <Sidebar className="col-span-1" />
