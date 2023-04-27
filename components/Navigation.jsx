@@ -59,14 +59,17 @@ export function Navigation({ links, className }) {
 
   return (
     <nav
-      className={classNames(className, "h-screen bg-light-grey text-mid-grey")}
+      className={classNames(
+        className,
+        "relative z-[4000] row-start-1 h-screen w-full translate-x-full bg-light-grey text-mid-grey transition-transform lg:translate-x-0"
+      )}
       ref={nav}
     >
       <ul className="relative flex flex-col tracking-tighter" ref={wrapper}>
         {navigation.map((item) => (
           <li
             key={item._uid}
-            className="block w-full text-6xl leading-none tracking-tighter"
+            className="block w-full text-8xl leading-none tracking-tighter lg:text-6xl"
           >
             <ActiveLink
               onClick={(e) => handleClick(e)}

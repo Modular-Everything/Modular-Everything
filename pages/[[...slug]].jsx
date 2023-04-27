@@ -63,16 +63,22 @@ export default function Home({ story, all_pages: { links } }) {
       <div className="transition-screen fixed top-0 -left-full z-[5000] h-screen w-full bg-blue" />
 
       <div className="grid h-screen w-screen grid-cols-12">
-        <Sidebar className="col-span-1" />
+        <Sidebar className="col-span-1 col-start-1" />
 
-        <Navigation links={nav} className="col-span-4" />
+        <Navigation
+          links={nav}
+          className="col-span-11 col-start-2 lg:col-span-4 lg:col-start-2"
+        />
 
         {page.full_slug.startsWith("work/") ? (
-          <Page className="col-span-7" blok={page}>
+          <Page
+            className="col-span-11 col-start-2 row-start-1 lg:col-span-7"
+            blok={page}
+          >
             {page.name}
           </Page>
         ) : (
-          <DragonDrop className="col-span-7" />
+          <DragonDrop className="col-span-11 col-start-2 row-start-1 lg:col-span-7" />
         )}
       </div>
     </>

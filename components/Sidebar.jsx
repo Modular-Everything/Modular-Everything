@@ -1,8 +1,21 @@
 import Link from "next/link";
+import { useState } from "react";
 
 import { classNames } from "../helpers/classNames";
 
 export function Sidebar({ className }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  function handleMenu() {
+    const menu = document.querySelector("nav");
+    if (menuOpen) {
+      menu.classList.add("translate-x-full");
+      setMenuOpen(false);
+    } else {
+      menu.classList.remove("translate-x-full");
+      setMenuOpen(true);
+    }
+  }
   return (
     <div
       className={classNames(
@@ -44,7 +57,15 @@ export function Sidebar({ className }) {
         </Link>
       </div>
 
-      <div className="sidebar__footer bg-blue text-lg leading-none tracking-tight">
+      <button
+        type="button"
+        className="bg-blue py-16 text-2xl leading-none tracking-tight lg:hidden"
+        onClick={handleMenu}
+      >
+        {menuOpen ? "CLOSE" : "WORK"}
+      </button>
+
+      <div className="sidebar__footer hidden bg-blue text-lg leading-none tracking-tight lg:block">
         Selected development works 18&ndash;23&#8599;
       </div>
     </div>
