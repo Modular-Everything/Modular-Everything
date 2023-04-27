@@ -70,7 +70,7 @@ export function Page({ blok, className }) {
         {content.media?.filename && <Media src={content.media} />}
       </div>
 
-      <div className="row-start-13 row-end-13 hidden justify-end lg:flex">
+      <div className="row-start-13 row-end-13 hidden justify-end lg:row-start-12 lg:flex">
         <div className="flex">
           <Link
             href="/"
