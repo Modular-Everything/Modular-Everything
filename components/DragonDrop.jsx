@@ -2,7 +2,6 @@ import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import debounce from "lodash/debounce";
 import random from "lodash/random";
-import { useRouter } from "next/router";
 import { useRef, useEffect } from "react";
 
 import { classNames } from "../helpers/classNames";
@@ -121,10 +120,10 @@ function createDraggable(className, wrapper) {
   const drop = new Audio("/audio/drop.mp3");
   const move = new Audio("/audio/move.mp3");
 
-  const tile = document.querySelector(".tile");
-  const grid = document.querySelector(".tiles");
-  const rows = Number(getComputedStyle(grid).getPropertyValue("--rows"));
-  const cols = Number(getComputedStyle(grid).getPropertyValue("--columns"));
+  // const tile = document.querySelector(".tile");
+  // const grid = document.querySelector(".tiles");
+  // const rows = Number(getComputedStyle(grid).getPropertyValue("--rows"));
+  // const cols = Number(getComputedStyle(grid).getPropertyValue("--columns"));
 
   function dragAction() {
     move.play();
