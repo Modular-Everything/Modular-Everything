@@ -1,4 +1,3 @@
-/* eslint-disable no-invalid-this */
 import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import debounce from "lodash/debounce";
@@ -64,6 +63,7 @@ function createTile(index) {
   const tile = document.createElement("div");
   tile.classList.add("tile", "draggable", "transition", ...tileStyle());
   tile.setAttribute("draggable", true);
+  tile.dataset.currentIndex = index;
   return tile;
 }
 
@@ -113,7 +113,6 @@ function createDraggable(className, wrapper) {
   const { clientWidth, clientHeight } = wrapper.querySelector(className);
   gsap.registerPlugin(Draggable);
 
-  const pickup = new Audio("/audio/pickup.mp3");
   const drop = new Audio("/audio/drop.mp3");
   const move = new Audio("/audio/move.mp3");
 
@@ -125,19 +124,50 @@ function createDraggable(className, wrapper) {
   function dragAction() {
     move.play();
 
-    // Calculate the current index based on element's position
-    const index = {
-      row: gsap.utils.clamp(
-        Math.round(this.y / tile.clientHeight),
-        rows,
-        Math.round(this.y / tile.clientHeight)
-      ),
-      col: gsap.utils.clamp(
-        Math.round(this.x / tile.clientWidth),
-        cols,
-        Math.round(this.x / tile.clientWidth)
-      ),
+    // const gridItems = [...grid.childNodes];
+    // const indexInGrid = gridItems.indexOf(e.target);
+    // const { currentIndex } = this.target.dataset;
+
+    // console.log(indexInGrid, currentIndex);
+    const index = 0;
+
+    console.log(this);
+
+    const tileSize = {
+      width: this.target.clientWidth,
+      height: this.target.clientHeight,
     };
+
+    console.log(tileSize);
+
+    function getIndex(direction, size, total) {
+      return gsap.utils.clamp(Math.round(direction / size), 0, total - 1);
+    }
+
+    switch (this.getDirection()) {
+      case "up": {
+        console.log(Math.round(this.y / tileSize.height));
+        break;
+      }
+      case "down": {
+        console.log(Math.round(this.y / tileSize.height));
+        console.log("going down");
+        break;
+      }
+      case "left": {
+        console.log(Math.round(this.y / tileSize.height));
+        console.log("going left");
+        break;
+      }
+      case "right": {
+        console.log(Math.round(this.y / tileSize.height));
+        console.log("going right");
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 
   Draggable.create(className, {
@@ -145,9 +175,7 @@ function createDraggable(className, wrapper) {
     type: "x,y",
     edgeResistance: 0.65,
     liveSnap: true,
-    // onPress: () => pickup.play(),
     onRelease: () => drop.play(),
-    // onDrag: () =>
     onDrag: dragAction,
     snap: {
       x(endValue) {
