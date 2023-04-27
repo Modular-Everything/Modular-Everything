@@ -2,6 +2,7 @@ import gsap from "gsap";
 import Draggable from "gsap/dist/Draggable";
 import debounce from "lodash/debounce";
 import random from "lodash/random";
+import { useRouter } from "next/router";
 import { useRef, useEffect } from "react";
 
 import { classNames } from "../helpers/classNames";
@@ -85,6 +86,10 @@ function createTiles(quantity, wrapper) {
  * @returns
  */
 function createGrid(wrapper) {
+  if (!wrapper) {
+    return;
+  }
+
   wrapper.innerHTML = "";
 
   const { columns, rows } = getRequiredTiles(wrapper);
@@ -129,48 +134,48 @@ function createDraggable(className, wrapper) {
     // const { currentIndex } = this.target.dataset;
 
     // console.log(indexInGrid, currentIndex);
-    const index = 0;
+    // const index = 0;
 
-    console.log(this);
+    // console.log(this);
 
-    const tileSize = {
-      width: this.target.clientWidth,
-      height: this.target.clientHeight,
-    };
+    // const tileSize = {
+    //   width: this.target.clientWidth,
+    //   height: this.target.clientHeight,
+    // };
 
-    console.log(tileSize);
+    // console.log(tileSize);
 
-    function getIndex(direction, size, total) {
-      return gsap.utils.clamp(Math.round(direction / size), 0, total - 1);
-    }
+    // function getIndex(direction, size, total) {
+    //   return gsap.utils.clamp(Math.round(direction / size), 0, total - 1);
+    // }
 
-    switch (this.getDirection()) {
-      case "up": {
-        console.log(Math.round(this.y / tileSize.height));
-        break;
-      }
-      case "down": {
-        console.log(Math.round(this.y / tileSize.height));
-        console.log("going down");
-        break;
-      }
-      case "left": {
-        console.log(Math.round(this.y / tileSize.height));
-        console.log("going left");
-        break;
-      }
-      case "right": {
-        console.log(Math.round(this.y / tileSize.height));
-        console.log("going right");
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+    // switch (this.getDirection()) {
+    //   case "up": {
+    //     console.log(Math.round(this.y / tileSize.height));
+    //     break;
+    //   }
+    //   case "down": {
+    //     console.log(Math.round(this.y / tileSize.height));
+    //     console.log("going down");
+    //     break;
+    //   }
+    //   case "left": {
+    //     console.log(Math.round(this.y / tileSize.height));
+    //     console.log("going left");
+    //     break;
+    //   }
+    //   case "right": {
+    //     console.log(Math.round(this.y / tileSize.height));
+    //     console.log("going right");
+    //     break;
+    //   }
+    //   default: {
+    //     break;
+    //   }
+    // }
   }
 
-  Draggable.create(className, {
+  return Draggable.create(className, {
     bounds: wrapper,
     type: "x,y",
     edgeResistance: 0.65,
@@ -201,12 +206,21 @@ export function DragonDrop({ className }) {
 
     // Create the grid layout
     createGrid(current);
-    handleResize(debounce(() => createGrid(current), 150));
+    const debounceCreateGrid = debounce(() => createGrid(current), 150);
+    handleResize(debounceCreateGrid);
 
     // Draggable
-    createDraggable(".draggable", current);
-    handleResize(debounce(() => createDraggable(".draggable", current), 150));
-  }, [wrapper]);
+    const debounceCreateDraggable = debounce(
+      () => createDraggable(".draggable", current),
+      150
+    );
+    handleResize(debounceCreateDraggable);
+
+    return () => {
+      window.removeEventListener("resize", debounceCreateGrid, false);
+      window.removeEventListener("resize", debounceCreateDraggable, false);
+    };
+  }, []);
 
   return (
     <div
