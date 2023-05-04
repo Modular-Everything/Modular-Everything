@@ -1,6 +1,6 @@
 const nextConfig = {
-  domains: ["a.storyblok.com"],
   images: {
+    domains: ["a.storyblok.com"],
     loader: "custom",
     loaderFile: "./helpers/imageLoader.js",
     remotePatterns: [
