@@ -1,4 +1,4 @@
-export default async function preview(req, res) {
+export default function preview(req, res) {
   const { slug = "" } = req.query;
   // get the storyblok params for the bridge to work
   const params = req.url.split("?");
