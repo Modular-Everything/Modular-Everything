@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-space-mono)", ...fontFamily.sans],
+        sans: ["var(--font-space-mono)", ...fontFamily.mono],
       },
       colors: {
         "pure-white": "#fff",
