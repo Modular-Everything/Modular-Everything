@@ -27,6 +27,7 @@ export default function Home({ story, all_pages: { links } }) {
       tl.to(target, {
         xPercent: 100,
         duration: 0.3,
+        delay: 0.1,
         ease,
         onStart: () => {
           gsap.set(title, {
