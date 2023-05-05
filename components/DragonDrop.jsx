@@ -209,6 +209,7 @@ export function DragonDrop({ className }) {
     handleResize(debounceCreateGrid);
 
     // Draggable
+    createDraggable(".draggable", current);
     const debounceCreateDraggable = debounce(
       () => createDraggable(".draggable", current),
       150
