@@ -37,6 +37,7 @@ export default function Home({ story, all_pages: { links } }) {
         {
           xPercent: 200,
           duration: 0.3,
+          delay: 0.1,
           ease: "Expo.easeInOut",
           onComplete: () => {
             gsap.set(target, { xPercent: 0 });
