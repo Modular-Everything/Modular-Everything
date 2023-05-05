@@ -69,10 +69,11 @@ export function Navigation({ links, className }) {
         {navigation.map((item, index) => {
           return (
             <li
-              // Add index to ID as we duplicate data.
-              // This index can be removed when I have more projects
+              // Using index as key as we duplicate data and the UID
+              // becomes duplicated. This index can be replaced with
+              // UID when I have more projects
               // eslint-disable-next-line react/no-array-index-key
-              key={item.id + index}
+              key={index}
               className="block w-full text-8xl leading-none tracking-tighter lg:text-6xl"
             >
               <ActiveLink
