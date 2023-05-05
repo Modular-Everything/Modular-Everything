@@ -33,7 +33,7 @@ export function Page({ blok, className }) {
       {...storyblokEditable(blok)}
     >
       {(content.type_of_work || content.stack) && (
-        <div className="row-start-1 row-end-1 flex flex-col justify-end bg-dark-grey text-3xl text-white lg:text-lg">
+        <div className="row-start-1 row-end-1 flex flex-col justify-end bg-dark-grey text-4xl text-white lg:text-lg">
           <p className="leading-none">
             {content.type_of_work && <span>{content.type_of_work}</span>}
             {content.type_of_work && content.stack && <span> &#8600; </span>}
@@ -42,18 +42,18 @@ export function Page({ blok, className }) {
         </div>
       )}
 
-      <div className="row-start-2 row-end-4 grid grid-cols-6 lg:row-end-5">
+      <div className="row-start-2 row-end-6 grid grid-cols-6 lg:row-end-5">
         {content.description && (
           <div className="col-span-5 flex flex-col justify-end bg-black lg:col-span-2">
             <h1 className="invisible h-0 w-0">{name}</h1>
-            <p className="text-3xl leading-none text-white lg:text-lg">
+            <p className="text-4xl leading-none text-white lg:text-lg">
               {content.description}
             </p>
           </div>
         )}
 
         {content.url?.url && (
-          <div className="col-span-1 flex flex-col justify-end text-3xl lg:text-lg">
+          <div className="col-span-1 flex flex-col justify-end text-4xl lg:text-lg">
             <a
               href={content.url.url}
               target="_blank"
@@ -66,7 +66,7 @@ export function Page({ blok, className }) {
         )}
       </div>
 
-      <div className="relative row-start-4 row-end-13 lg:row-start-5 lg:row-end-12">
+      <div className="relative row-start-6 row-end-13 lg:row-start-5 lg:row-end-12">
         {content.media?.filename && <Media src={content.media} />}
       </div>
 
