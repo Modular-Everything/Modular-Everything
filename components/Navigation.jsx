@@ -66,21 +66,26 @@ export function Navigation({ links, className }) {
       ref={nav}
     >
       <ul className="relative flex flex-col tracking-tighter" ref={wrapper}>
-        {navigation.map((item) => (
-          <li
-            key={item._uid}
-            className="block w-full text-8xl leading-none tracking-tighter lg:text-6xl"
-          >
-            <ActiveLink
-              onClick={(e) => handleClick(e)}
-              className="block cursor-pointer transition-colors hover:text-black"
-              activeClassName="text-black pointer-events-none"
-              href={`/${item.slug}`}
+        {navigation.map((item, index) => {
+          return (
+            <li
+              // Add index to ID as we duplicate data.
+              // This index can be removed when I have more projects
+              // eslint-disable-next-line react/no-array-index-key
+              key={item.id + index}
+              className="block w-full text-8xl leading-none tracking-tighter lg:text-6xl"
             >
-              {item.name}
-            </ActiveLink>
-          </li>
-        ))}
+              <ActiveLink
+                onClick={(e) => handleClick(e)}
+                className="block cursor-pointer transition-colors hover:text-black"
+                activeClassName="text-black pointer-events-none"
+                href={`/${item.slug}`}
+              >
+                {item.name}
+              </ActiveLink>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
