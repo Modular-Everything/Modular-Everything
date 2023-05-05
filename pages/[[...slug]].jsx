@@ -19,17 +19,38 @@ export default function Home({ story, all_pages: { links } }) {
 
   useEffect(() => {
     const target = ".transition-screen";
+    const title = ".transition-screen h1";
+    const tl = gsap.timeline();
+    const ease = "Expo.easeInOut";
 
     function aniStart() {
-      gsap.to(target, {
+      tl.to(target, {
         xPercent: 100,
         duration: 0.3,
-        ease: "Expo.easeInOut",
+        ease,
+        onStart: () => {
+          gsap.set(title, {
+            autoAlpha: 0,
+            yPercent: 0,
+          });
+        },
       });
     }
 
     function aniEnd() {
-      gsap.fromTo(
+      tl.fromTo(
+        title,
+        {
+          autoAlpha: 0,
+        },
+        {
+          autoAlpha: 1,
+          duration: 0.2,
+          ease: "none",
+        }
+      );
+
+      tl.fromTo(
         target,
         {
           xPercent: 100,
@@ -38,7 +59,7 @@ export default function Home({ story, all_pages: { links } }) {
           xPercent: 200,
           duration: 0.3,
           delay: 0.1,
-          ease: "Expo.easeInOut",
+          ease,
           onComplete: () => {
             gsap.set(target, { xPercent: 0 });
           },
@@ -55,13 +76,17 @@ export default function Home({ story, all_pages: { links } }) {
       router.events.off("routeChangeComplete", aniEnd);
       router.events.off("routeChangeError", aniEnd);
     };
-  }, [router]);
+  }, [router, page.name]);
 
   return (
     <>
       <PageHead />
 
-      <div className="transition-screen fixed top-0 -left-full z-[5000] h-screen w-full bg-blue" />
+      <div className="transition-screen fixed top-0 -left-full z-[5000] grid h-screen w-full place-content-center bg-blue">
+        <h1 className="whitespace-nowrap text-center text-8xl font-bold">
+          {page.name}
+        </h1>
+      </div>
 
       <div className="grid h-screen w-screen grid-cols-12">
         <Sidebar className="col-span-1 col-start-1" />
