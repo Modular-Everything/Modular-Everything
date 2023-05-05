@@ -96,9 +96,12 @@ export async function getStaticPaths() {
   const paths = ["/"];
 
   Object.keys(data.links).forEach((linkKey) => {
-    const { slug } = data.links[linkKey];
+    const { slug, is_folder } = data.links[linkKey];
     const splittedSlug = slug.split("/");
-    paths.push({ params: { slug: splittedSlug } });
+
+    if (!is_folder) {
+      paths.push({ params: { slug: splittedSlug } });
+    }
   });
 
   return {
