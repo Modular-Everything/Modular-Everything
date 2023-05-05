@@ -68,7 +68,7 @@ export default function Home({ story, all_pages: { links } }) {
 
         {page.full_slug.startsWith("work/") ? (
           <div className="relative col-span-11 col-start-2 row-start-1 lg:col-span-7">
-            <div className="transition-screen pointer-events-none absolute top-0 left-0 z-10 h-full w-full bg-blue opacity-0" />
+            <div className="transition-screen pointer-events-none absolute top-0 left-0 z-[4500] h-full w-full bg-blue opacity-0" />
             <Page blok={page} />
           </div>
         ) : (
