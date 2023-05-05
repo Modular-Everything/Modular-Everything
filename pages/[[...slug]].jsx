@@ -19,51 +19,26 @@ export default function Home({ story, all_pages: { links } }) {
 
   useEffect(() => {
     const target = ".transition-screen";
-    const title = ".transition-screen h1";
-    const tl = gsap.timeline();
     const ease = "Expo.easeInOut";
 
     function aniStart() {
-      tl.to(target, {
-        xPercent: 100,
+      gsap.to(target, {
+        autoAlpha: 1,
         duration: 0.3,
-        delay: 0.1,
         ease,
-        onStart: () => {
-          gsap.set(title, {
-            autoAlpha: 0,
-            yPercent: 0,
-          });
-        },
       });
     }
 
     function aniEnd() {
-      tl.fromTo(
-        title,
-        {
-          autoAlpha: 0,
-        },
-        {
-          autoAlpha: 1,
-          duration: 0.2,
-          ease: "none",
-        }
-      );
-
-      tl.fromTo(
+      gsap.fromTo(
         target,
         {
-          xPercent: 100,
+          autoAlpha: 1,
         },
         {
-          xPercent: 200,
-          duration: 0.3,
-          delay: 0.1,
+          autoAlpha: 0,
+          duration: 1,
           ease,
-          onComplete: () => {
-            gsap.set(target, { xPercent: 0 });
-          },
         }
       );
     }
@@ -83,12 +58,6 @@ export default function Home({ story, all_pages: { links } }) {
     <>
       <PageHead />
 
-      <div className="transition-screen fixed top-0 -left-full z-[5000] grid h-screen w-full place-content-center bg-blue">
-        <h1 className="whitespace-nowrap text-center text-8xl font-bold">
-          {page.name}
-        </h1>
-      </div>
-
       <div className="grid h-screen w-screen grid-cols-12">
         <Sidebar className="col-span-1 col-start-1" />
 
@@ -98,12 +67,10 @@ export default function Home({ story, all_pages: { links } }) {
         />
 
         {page.full_slug.startsWith("work/") ? (
-          <Page
-            className="col-span-11 col-start-2 row-start-1 lg:col-span-7"
-            blok={page}
-          >
-            {page.name}
-          </Page>
+          <div className="relative col-span-11 col-start-2 row-start-1 lg:col-span-7">
+            <div className="transition-screen pointer-events-none absolute top-0 left-0 z-10 h-full w-full bg-blue opacity-0" />
+            <Page blok={page} />
+          </div>
         ) : (
           <DragonDrop className="col-span-11 col-start-2 row-start-1 lg:col-span-7" />
         )}
