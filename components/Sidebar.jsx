@@ -24,7 +24,7 @@ export function Sidebar({ className }) {
       )}
     >
       <div className="sidebar__logo">
-        <Link href="/">
+        <Link href="/" aria-label="Return to homepage">
           <svg
             width="137"
             height="371"
