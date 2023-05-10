@@ -7,7 +7,6 @@ html {
   @apply fixed overflow-hidden leading-none;
 
   font-size: calc(var(--vw) / 768 * 10);
-  height: -webkit-fill-available;
 }
 
 @media (min-width: 768px) {
@@ -24,8 +23,6 @@ html {
 
 body {
   @apply fixed left-0 top-0 h-full w-full bg-pure-white leading-none tracking-tight text-black antialiased;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
 
 a {
