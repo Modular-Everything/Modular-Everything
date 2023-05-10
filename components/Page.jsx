@@ -73,7 +73,7 @@ export function Page({ blok, className }) {
       <div className="row-start-13 row-end-13 hidden justify-end lg:row-start-12 lg:flex">
         <div className="flex">
           <Link
-            href="/"
+            href="/say-hi"
             className="flex flex-col justify-end whitespace-nowrap bg-dark-grey text-white"
           >
             Leave a comment

@@ -23,9 +23,11 @@ module.exports = {
         blue: "#9FF1FF",
       },
       gridTemplateColumns: {
+        "chat-message": "1fr auto",
         "dragon-drop": "repeat(var(--columns), 1fr)",
       },
       gridTemplateRows: {
+        chat: "1fr auto",
         "dragon-drop": "repeat(var(--rows), 1fr)",
         12: "repeat(12, 1fr)",
       },
@@ -44,6 +46,9 @@ module.exports = {
         11: "11",
         12: "12",
         13: "13",
+      },
+      width: {
+        "fit-content": "fit-content",
       },
     },
   },
