@@ -1,9 +1,9 @@
 import Head from "next/head";
 
-export function PageHead() {
+export function PageHead({ title }) {
   return (
     <Head>
-      <title>Boilerplate</title>
+      <title>{title}</title>
     </Head>
   );
 }
