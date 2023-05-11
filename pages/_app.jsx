@@ -20,6 +20,8 @@ const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-space-mono",
+  display: "swap",
+  fallback: "ui-monospace, monospace",
 });
 
 function LaunchApp({ Component, pageProps }) {
