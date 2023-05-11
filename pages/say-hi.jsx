@@ -215,7 +215,7 @@ function SayHi() {
     <>
       <PageHead title="Leave a message" />
 
-      <section className="h-screen w-full bg-light-grey">
+      <section className="h-full w-full bg-light-grey">
         <LeaveAMessage />
       </section>
     </>

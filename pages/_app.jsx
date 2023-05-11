@@ -34,7 +34,7 @@ function LaunchApp({ Component, pageProps }) {
   }
 
   return (
-    <main className={`${spaceMono.variable} font-sans`}>
+    <main className={`${spaceMono.variable} h-full font-sans`}>
       <Component {...pageProps} />
     </main>
   );

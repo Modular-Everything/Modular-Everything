@@ -28,3 +28,7 @@ body {
 a {
   color: inherit;
 }
+
+#__next {
+  height: 100%;
+}
