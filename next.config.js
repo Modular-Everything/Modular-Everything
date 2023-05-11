@@ -1,8 +1,4 @@
 const nextConfig = {
-  i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
-  },
   images: {
     domains: ["a.storyblok.com"],
     loader: "custom",
