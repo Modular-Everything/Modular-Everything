@@ -42,9 +42,9 @@ export function Page({ blok, className }) {
         </div>
       )}
 
-      <div className="row-start-2 row-end-6 grid grid-cols-6 lg:row-end-5">
+      <div className="row-start-2 row-end-6 grid grid-cols-7 lg:row-end-5">
         {content.description && (
-          <div className="col-span-5 flex flex-col justify-end bg-black lg:col-span-2">
+          <div className="col-span-6 flex flex-col justify-end bg-black lg:col-span-3">
             <h1 className="invisible h-0 w-0">{name}</h1>
             <p className="text-4xl leading-none text-white lg:text-lg">
               {content.description}
@@ -66,37 +66,8 @@ export function Page({ blok, className }) {
         )}
       </div>
 
-      <div className="relative row-start-6 row-end-13 lg:row-start-5 lg:row-end-12">
+      <div className="relative row-start-6 row-end-13 lg:row-start-5 lg:row-end-13">
         {content.media?.filename && <Media src={content.media} />}
-      </div>
-
-      <div className="row-start-13 row-end-13 hidden justify-end lg:row-start-12 lg:flex">
-        <div className="flex">
-          <Link
-            href="/say-hi"
-            className="flex flex-col justify-end whitespace-nowrap bg-dark-grey text-white"
-          >
-            Leave a comment
-          </Link>
-
-          <div className="flex w-72 items-end">
-            <div className="w-full bg-blue">
-              <svg
-                width="17"
-                height="19"
-                viewBox="0 0 17 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="object-fit h-5 w-5"
-              >
-                <path
-                  d="M2.1 19H13.2V14.811H8.26667L6.7 15.2598L6.46667 14.624L7.76667 13.5768L17 3.25394L14.1 0L4.9 10.3602L3.96667 11.8189L3.4 11.5571L3.8 9.79921V4.18898H0V16.6437L2.1 19Z"
-                  fill="#2B2B2B"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
