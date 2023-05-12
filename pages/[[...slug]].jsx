@@ -1,5 +1,6 @@
 import { useStoryblokState, getStoryblokApi } from "@storyblok/react";
 import { gsap } from "gsap";
+import debounce from "lodash/debounce";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
@@ -8,6 +9,7 @@ import { PageHead } from "../components/Head";
 import { Navigation } from "../components/Navigation";
 import { Page } from "../components/Page";
 import { Sidebar } from "../components/Sidebar";
+import { setPageSize } from "../helpers/setPageSize";
 
 export default function Home({ story, all_pages: { links } }) {
   const page = useStoryblokState(story);
@@ -18,6 +20,20 @@ export default function Home({ story, all_pages: { links } }) {
   const router = useRouter();
 
   useEffect(() => {
+    /**
+     * Set the page height when the page loads or resizes
+     * This is to fix the problem with 100vh not working on
+     * certain mobile devices
+     */
+    setPageSize();
+    window.addEventListener(
+      "resize",
+      debounce(() => setPageSize(), 150)
+    );
+
+    /**
+     * Animate between pages
+     */
     const target = ".transition-screen";
     const ease = "Expo.easeInOut";
 
@@ -51,6 +67,11 @@ export default function Home({ story, all_pages: { links } }) {
       router.events.off("routeChangeStart", aniStart);
       router.events.off("routeChangeComplete", aniEnd);
       router.events.off("routeChangeError", aniEnd);
+      window.removeEventListener(
+        "resize",
+        debounce(() => setPageSize()),
+        false
+      );
     };
   }, [router, page.name]);
 
@@ -58,7 +79,7 @@ export default function Home({ story, all_pages: { links } }) {
     <>
       <PageHead title="Modular Everything" />
 
-      <div className="grid h-screen w-screen grid-cols-12">
+      <div className="grid h-[--pageHeight] w-screen grid-cols-12">
         <Sidebar className="col-span-1 col-start-1" />
 
         <Navigation

@@ -28,7 +28,7 @@ export function Page({ blok, className }) {
 
   return (
     <div
-      className={classNames(className, "grid h-screen grid-rows-12")}
+      className={classNames(className, "grid h-[--pageHeight] grid-rows-12")}
       {...storyblokEditable(blok)}
     >
       {(content.type_of_work || content.stack) && (

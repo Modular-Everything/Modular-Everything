@@ -20,7 +20,7 @@ export function Sidebar({ className }) {
     <div
       className={classNames(
         className,
-        "flex h-screen flex-col justify-between"
+        "flex h-[--pageHeight] flex-col justify-between"
       )}
     >
       <div className="sidebar__logo">

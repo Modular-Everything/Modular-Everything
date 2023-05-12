@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --pageHeight: 100vh;
+  --pageWidth: 100vw;
+}
+
 html {
   --vw: 100vw;
   @apply fixed overflow-hidden leading-none;
