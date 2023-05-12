@@ -164,7 +164,9 @@ function LeaveAMessage() {
     <div className="grid h-full grid-rows-chat">
       <div className="flex w-full flex-col gap-4 overflow-auto">
         {messages &&
-          messages.map((msg) => <ChatMessage key={msg.uid} message={msg} />)}
+          messages.map((msg) => (
+            <ChatMessage key={msg.createdAt.nanoseconds} message={msg} />
+          ))}
 
         <div ref={dummy} />
       </div>
