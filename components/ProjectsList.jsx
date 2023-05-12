@@ -11,18 +11,11 @@ function handleClick(e) {
   click.play();
 }
 
-export function Navigation({ links, className }) {
+export function ProjectsList({ links, className }) {
   const nav = useRef();
   const wrapper = useRef();
 
-  const navigation = [
-    ...links,
-    ...links,
-    ...links,
-    ...links,
-    ...links,
-    ...links,
-  ];
+  const projects = [...links, ...links, ...links];
 
   useLayoutEffect(() => {
     gsap.registerPlugin(Observer);
@@ -66,7 +59,7 @@ export function Navigation({ links, className }) {
       ref={nav}
     >
       <ul className="relative flex flex-col tracking-tighter" ref={wrapper}>
-        {navigation.map((item, index) => {
+        {projects.map((item, index) => {
           return (
             <li
               // Using index as key as we duplicate data and the UID

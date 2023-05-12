@@ -6,8 +6,8 @@ import { useEffect } from "react";
 
 import { DragonDrop } from "../components/DragonDrop";
 import { PageHead } from "../components/Head";
-import { Navigation } from "../components/Navigation";
 import { Page } from "../components/Page";
+import { ProjectsList } from "../components/ProjectsList";
 import { Sidebar } from "../components/Sidebar";
 import { setPageSize } from "../helpers/setPageSize";
 
@@ -82,7 +82,7 @@ export default function Home({ story, all_pages: { links } }) {
       <div className="grid h-[--pageHeight] w-screen grid-cols-12">
         <Sidebar className="col-span-1 col-start-1" />
 
-        <Navigation
+        <ProjectsList
           links={nav}
           className="col-span-11 col-start-2 lg:col-span-4 lg:col-start-2"
         />
