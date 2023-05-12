@@ -17,6 +17,12 @@ html {
 
 @media (min-width: 1200px) {
   html {
+    font-size: calc(var(--vw) / 1440 * 10);
+  }
+}
+
+@media (min-width: 1440px) {
+  html {
     font-size: calc(var(--vw) / 1512 * 10);
   }
 }
