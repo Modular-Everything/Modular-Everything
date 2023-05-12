@@ -227,7 +227,7 @@ export function DragonDrop({ className }) {
       ref={wrapper}
       className={classNames(
         className,
-        "tiles drop-zone grid h-screen w-full grid-cols-dragon-drop grid-rows-dragon-drop"
+        "tiles drop-zone grid h-full w-full grid-cols-dragon-drop grid-rows-dragon-drop"
       )}
     />
   );

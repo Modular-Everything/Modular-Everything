@@ -58,7 +58,7 @@ export default function Home({ story, all_pages: { links } }) {
     <>
       <PageHead title="Modular Everything" />
 
-      <div className="grid h-screen w-screen grid-cols-12">
+      <div className="grid h-full w-screen grid-cols-12">
         <Sidebar className="col-span-1 col-start-1" />
 
         <Navigation

@@ -61,7 +61,7 @@ export function Navigation({ links, className }) {
     <nav
       className={classNames(
         className,
-        "relative z-[4000] row-start-1 h-screen w-full translate-x-full bg-light-grey text-mid-grey transition-transform lg:translate-x-0"
+        "relative z-[4000] row-start-1 h-full w-full translate-x-full overflow-hidden bg-light-grey text-mid-grey transition-transform lg:translate-x-0"
       )}
       ref={nav}
     >
