@@ -1,6 +1,5 @@
 import { storyblokEditable } from "@storyblok/react";
 import Image from "next/image";
-import Link from "next/link";
 
 import { classNames } from "../helpers/classNames";
 
