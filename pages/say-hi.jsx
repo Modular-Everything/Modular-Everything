@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 
 import { PageHead } from "../components/Head";
+import { Navigation } from "../components/Navigation";
 import { classNames } from "../helpers/classNames";
 
 firebase.initializeApp({
@@ -216,8 +217,9 @@ function SayHi() {
   return (
     <>
       <PageHead title="Leave a message" />
+      <Navigation active="say-hi" />
 
-      <section className="h-full w-full bg-light-grey">
+      <section className="h-full w-full bg-light-grey pt-10">
         <LeaveAMessage />
       </section>
     </>

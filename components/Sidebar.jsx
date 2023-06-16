@@ -16,6 +16,7 @@ export function Sidebar({ className }) {
       setMenuOpen(true);
     }
   }
+
   return (
     <div
       className={classNames(
@@ -57,13 +58,33 @@ export function Sidebar({ className }) {
         </Link>
       </div>
 
-      <button
-        type="button"
-        className="bg-blue py-16 text-2xl leading-none tracking-tight lg:hidden"
-        onClick={handleMenu}
-      >
-        {menuOpen ? "CLOSE" : "WORK"}
-      </button>
+      <div className="flex flex-col">
+        <Link
+          href="/say-hi"
+          className="grid place-content-center bg-light-grey py-16 text-center text-2xl uppercase leading-none tracking-tight md:hidden"
+        >
+          Say
+          <br />
+          hi
+        </Link>
+
+        <a
+          href="mailto:yo@modular-everything.com"
+          className="grid place-content-center bg-light-grey py-16 text-2xl uppercase leading-none tracking-tight md:hidden"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Email
+        </a>
+
+        <button
+          type="button"
+          className="grid place-content-center bg-blue py-16 text-2xl uppercase leading-none tracking-tight lg:hidden"
+          onClick={handleMenu}
+        >
+          {menuOpen ? "Close" : "Work"}
+        </button>
+      </div>
 
       <div className="sidebar__footer hidden bg-blue text-lg leading-none tracking-tight lg:block">
         Selected development works 18&ndash;23&#8599;

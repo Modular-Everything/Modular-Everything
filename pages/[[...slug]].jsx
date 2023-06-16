@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 import { DragonDrop } from "../components/DragonDrop";
 import { PageHead } from "../components/Head";
+import { Navigation } from "../components/Navigation";
 import { Page } from "../components/Page";
 import { ProjectsList } from "../components/ProjectsList";
 import { Sidebar } from "../components/Sidebar";
@@ -77,19 +78,22 @@ export default function Home({ story, all_pages: { links } }) {
 
   return (
     <>
-      <PageHead title="Modular Everything" />
+      <PageHead title={`${page.name && `${page.name} — `}Modular Everything`} />
 
-      <div className="grid h-[--pageHeight] w-screen grid-cols-12">
-        <Sidebar className="col-span-1 col-start-1" />
+      <div className="grid h-[--pageHeight] w-[--pageWidth] grid-cols-12">
+        <Sidebar className="col-span-1 col-start-1 row-start-1" />
 
         <ProjectsList
           links={nav}
-          className="col-span-11 col-start-2 lg:col-span-4 lg:col-start-2"
+          className="col-span-11 col-start-2 lg:col-span-4"
         />
 
+        <Navigation active="work" />
+
         {page.full_slug.startsWith("work/") ? (
-          <div className="relative col-span-11 col-start-2 row-start-1 lg:col-span-7">
-            <div className="transition-screen pointer-events-none absolute left-0 top-0 z-[4500] h-full w-full bg-blue opacity-0" />
+          <div className="relative col-span-11 col-start-2 row-start-1 lg:col-start-6 lg:col-end-13">
+            <div className="transition-screen pointer-events-none absolute left-0 top-0 z-[4000] h-full w-full bg-blue opacity-0" />
+
             <Page blok={page} />
           </div>
         ) : (
