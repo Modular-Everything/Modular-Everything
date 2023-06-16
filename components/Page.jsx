@@ -5,8 +5,9 @@ import { classNames } from "../helpers/classNames";
 
 function Media({ src }) {
   const { filename, alt } = src;
+  const ACCEPTED_EXTENSIONS = [".webm", ".mov", "mp4"];
 
-  if (filename.includes(".webm")) {
+  if (ACCEPTED_EXTENSIONS.some((ext) => filename.includes(ext))) {
     return (
       <video
         muted
