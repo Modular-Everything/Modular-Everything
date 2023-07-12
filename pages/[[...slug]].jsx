@@ -79,7 +79,7 @@ export default function Home({ story, all_pages: { links } }) {
   /**
    * Deconstruct page and page content from our story
    */
-  const { content } = page;
+  const { content, full_slug } = page;
   const { page_name } = content;
 
   /**
@@ -100,7 +100,7 @@ export default function Home({ story, all_pages: { links } }) {
 
         <Navigation active="work" />
 
-        {page.full_slug.startsWith("work/") ? (
+        {full_slug.startsWith("work/") ? (
           <div className="relative col-span-11 col-start-2 row-start-1 lg:col-start-6 lg:col-end-13">
             <div className="transition-screen pointer-events-none absolute left-0 top-0 z-[4000] h-full w-full bg-blue opacity-0" />
 
