@@ -1,4 +1,5 @@
 import firebase from "firebase/compat/app";
+import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
@@ -216,10 +217,14 @@ function LeaveAMessage() {
 function SayHi() {
   return (
     <>
-      <PageHead title="Leave a message" />
-      <Navigation active="say-hi" />
+      <PageHead title="Leave a message — Modular Everything" />
 
-      <section className="h-full w-full bg-light-grey pt-10">
+      <Navigation active="say-hi" />
+      <div className="absolute top-0 bg-dark-grey text-3xl text-white md:hidden">
+        <Link href="/">Go back</Link>
+      </div>
+
+      <section className="h-full w-full bg-light-grey pt-24 md:pt-10">
         <LeaveAMessage />
       </section>
     </>
