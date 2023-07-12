@@ -87,7 +87,8 @@ export function Sidebar({ className }) {
       </div>
 
       <div className="sidebar__footer hidden bg-blue text-lg leading-none tracking-tight lg:block">
-        Selected development works 18&ndash;23&#8599;
+        Selected development works 18&ndash;
+        {new Date().getFullYear().toString().slice(-2)}&#8599;
       </div>
     </div>
   );
