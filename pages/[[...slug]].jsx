@@ -118,7 +118,7 @@ export async function getStaticPaths() {
   const storyblokApi = getStoryblokApi();
 
   const sbParams = {
-    version: "draft", // or 'published'
+    version: "published", // or 'published'
   };
 
   const { data } = await storyblokApi.get("cdn/links/", sbParams);
@@ -143,7 +143,7 @@ export async function getStaticProps({ params }) {
   const slug = params.slug ? params.slug.join("/") : "home";
 
   const sbParams = {
-    version: "draft", // or 'published'
+    version: "published", // or 'published'
   };
 
   const storyblokApi = getStoryblokApi();
