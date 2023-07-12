@@ -24,7 +24,7 @@ export function Navigation({ active }) {
           target="_blank"
           rel="noreferrer noopener"
         >
-          Email me
+          Email me&#8599;
         </a>
         <Link
           href="/say-hi"

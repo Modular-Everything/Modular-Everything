@@ -74,7 +74,7 @@ export function Sidebar({ className }) {
           target="_blank"
           rel="noreferrer noopener"
         >
-          Email
+          Email&#8599;
         </a>
 
         <button
