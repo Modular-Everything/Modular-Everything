@@ -76,9 +76,19 @@ export default function Home({ story, all_pages: { links } }) {
     };
   }, [router, page.name]);
 
+  /**
+   * Deconstruct page and page content from our story
+   */
+  const { content } = page;
+  const { page_name } = content;
+
+  /**
+   * Render the page/slug
+   */
+
   return (
     <>
-      <PageHead title={`${page.name && `${page.name} — `}Modular Everything`} />
+      <PageHead title={`${page_name || page.name} — Modular Everything`} />
 
       <div className="grid h-[--pageHeight] w-[--pageWidth] grid-cols-12">
         <Sidebar className="col-span-1 col-start-1 row-start-1" />
