@@ -15,7 +15,7 @@ export function ProjectsList({ links, className }) {
   const nav = useRef();
   const wrapper = useRef();
 
-  const projects = [...links, ...links, ...links];
+  const projects = [...links, ...links, ...links, ...links];
 
   useLayoutEffect(() => {
     gsap.registerPlugin(Observer);
