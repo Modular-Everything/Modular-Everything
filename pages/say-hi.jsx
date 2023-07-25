@@ -167,7 +167,7 @@ function LeaveAMessage() {
       <div className="flex w-full flex-col gap-4 overflow-auto">
         {messages &&
           messages.map((msg) => (
-            <ChatMessage key={msg.createdAt.nanoseconds} message={msg} />
+            <ChatMessage key={msg?.createdAt?.nanoseconds} message={msg} />
           ))}
 
         <div ref={dummy} />
